@@ -17,3 +17,10 @@ class GarmentSerializer(serializers.ModelSerializer):
             'size',
             'type'
         ]
+
+    def __init__(self, *args, **kwargs):
+        """ Make description and price fields optional only for updates """
+        super().__init__(*args, **kwargs)
+        if self.instance:  # Only for updates
+            self.fields['description'].required = False
+            self.fields['price'].required = False

@@ -1,3 +1,5 @@
+from functools import partial
+
 from rest_framework import (
     generics,
     viewsets,
@@ -15,6 +17,7 @@ from rest_framework.exceptions import PermissionDenied
 
 
 class GarmentViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Garment list and detail views for read-only purposes. No authentication required.  """
     queryset = Garment.objects.prefetch_related('publisher')
     serializer_class = GarmentSerializer
     pagination_class = StandardPagination
@@ -23,7 +26,7 @@ class GarmentViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class GarmentPublishView(views.APIView):
-    """ Publish a garment """
+    """ Publish a garment. Authentication required. """
 
     permission_classes = [permissions.IsAuthenticated]
 
@@ -36,7 +39,7 @@ class GarmentPublishView(views.APIView):
 
 
 class GarmentUpdateView(generics.UpdateAPIView):
-    """ Update a garment """
+    """ Update a garment. Authentication and garment ownership required. """
 
     queryset = Garment.objects.all()
     serializer_class = GarmentSerializer
@@ -51,7 +54,7 @@ class GarmentUpdateView(generics.UpdateAPIView):
 
 
 class GarmentDeleteView(generics.DestroyAPIView):
-    """ Delete a garment """
+    """ Delete a garment. Authentication and garment ownership required. """
 
     queryset = Garment.objects.all()
     permission_classes = [permissions.IsAuthenticated]
