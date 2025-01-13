@@ -18,6 +18,11 @@ class GarmentSerializer(serializers.ModelSerializer):
             'type'
         ]
 
+    def validate_price(self, value):
+        if value < 0:
+            raise serializers.ValidationError("Price cannot be negative.")
+        return value
+
     def __init__(self, *args, **kwargs):
         """ Make description and price fields optional only for updates """
         super().__init__(*args, **kwargs)

@@ -109,3 +109,16 @@ class GarmentViewTests(TestCase):
         self.client.logout()
         response = self.client.delete(f"/api/clothes/{garment.id}/delete/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_create_garment_with_negative_price(self):
+        """ Test that a garment cannot be created with a negative price """
+        invalid_garment_data = {
+            "description": "Invalid Garment",
+            "price": -19.99,  # Invalid negative price
+            "size": "MD",
+            "type": "SH"
+        }
+        response = self.client.post("/api/clothes/publish/", invalid_garment_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("price", response.data)
+        self.assertEqual(response.data["price"][0], "Price cannot be negative.")
