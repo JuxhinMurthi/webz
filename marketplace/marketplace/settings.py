@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authuser.apps.AuthuserConfig',
     'clothes.apps.ClothesConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Set custom user as default project user
 AUTH_USER_MODEL = 'authuser.User'
+
+# Django REST framework permissions
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

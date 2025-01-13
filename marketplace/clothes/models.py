@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Create your models here.
 class Garment(models.Model):
-    """Garment model"""
+    """ Garment model """
 
     class Size(models.TextChoices):
         """ Size Choices """
@@ -22,7 +22,6 @@ class Garment(models.Model):
         DRESS = 'DR', 'Dress'
         OTHER = 'OT', 'Other'
 
-
     publisher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -37,5 +36,5 @@ class Garment(models.Model):
         default=Type.SHIRT,
     )
 
-
-
+    def __str__(self):
+        return self.description
