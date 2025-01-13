@@ -14,7 +14,15 @@ This project is a Django-based REST API for a second-hand clothes marketplace. I
 ## Requirements
 - **Language**: Python
 - **Framework**: Django and Django REST Framework
-- **Database**: SQLite (default); supports other databases with modifications to the `settings.py` file.
+- **Database**: The default database is SQLite. If you wish to use a different database, create a `.env` file in the project’s root directory and specify the database configuration as shown below ex. (PostgreSQL):
+
+  ```
+  DB_ENGINE=django.db.backends.postgresql
+  DB_NAME=my_database
+  DB_USER=my_user
+  DB_PASSWORD=my_password
+  DB_HOST=localhost
+  DB_PORT=5432
 
 ## Installation Instructions
 
